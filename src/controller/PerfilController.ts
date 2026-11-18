@@ -1,13 +1,9 @@
-// src/controller/PerfilController.ts
+
 import type { Request, Response } from "express";
 import { Usuario } from "../model/Usuario.js";
 import type { UsuarioDTO } from "../interface/UsuarioDTO.js";
 
-/**
- * Endpoints para a tela "Meu perfil" (PPerfil) do frontend — sempre operam
- * sobre o usuário autenticado (req.usuario, preenchido pelo Auth.verifyToken),
- * nunca sobre um id arbitrário vindo da URL.
- */
+
 class PerfilController {
 
     static async meuPerfil(req: Request, res: Response): Promise<void> {
