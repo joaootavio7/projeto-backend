@@ -1,6 +1,6 @@
-// src/controller/ProdutoController.ts
+
 import type { Request, Response } from "express";
-import Produto from "../model/Produto.js"; // Importando como default
+import Produto from "../model/Produto.js"; 
 import type { ProdutoDTO } from "../interface/ProdutoDTO.js";
 
 class ProdutoController {
