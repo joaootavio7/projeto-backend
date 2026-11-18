@@ -6,6 +6,5 @@ export interface ProdutoDTO {
     preco:       number;
     estoque:     number;
     idCategoria: number;
-    // URL da imagem do produto (consumida pelo frontend em ImagemProduto/PProduto/PLoja).
     imagem?:     string | null;
 }
