@@ -5,6 +5,5 @@ export interface UsuarioDTO {
     cpf:        string;
     senha:      string;
     role?:      "cliente" | "admin";
-    // Usado pela tela de perfil (PPerfil) do frontend.
     telefone?:  string | null;
 }
