@@ -1,4 +1,4 @@
-// src/model/Usuario.ts
+
 import { DatabaseModel } from "./DatabaseModel.js";
 import type { UsuarioDTO } from "../interface/UsuarioDTO.js";
 import bcrypt from "bcryptjs";
@@ -48,7 +48,7 @@ export class Usuario {
     static async cadastrarUsuario(usuario: UsuarioDTO): Promise<boolean> {
         try {
             const senhaHash = await bcrypt.hash(usuario.senha, 10);
-            // Cadastro público sempre cria clientes; a role "admin" só é atribuída manualmente no banco.
+            
             const resposta = await database.query(
                 `INSERT INTO usuarios (nome, email, cpf, senha, role) VALUES ($1, $2, $3, $4, 'cliente') RETURNING id_usuario`,
                 [usuario.nome, usuario.email, usuario.cpf, senhaHash]
@@ -73,10 +73,7 @@ export class Usuario {
         }
     }
 
-    /**
-     * Atualização parcial usada pela tela de perfil (PPerfil): só altera os
-     * campos informados (nome, email, telefone), sem exigir CPF/senha.
-     */
+
     static async atualizarPerfil(id: number, dados: Partial<UsuarioDTO>): Promise<boolean> {
         try {
             const campos: string[] = [];
