@@ -1,4 +1,4 @@
-// src/controller/UsuarioController.ts
+
 import type { Request, Response } from "express";
 import { Usuario } from "../model/Usuario.js";
 import type { UsuarioDTO } from "../interface/UsuarioDTO.js";
