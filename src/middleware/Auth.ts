@@ -13,7 +13,6 @@ interface JwtPayload {
     exp:       number;
 }
 
-// Estende o Request para carregar o usuário autenticado nos middlewares seguintes
 declare global {
     namespace Express {
         interface Request {
@@ -22,14 +21,10 @@ declare global {
     }
 }
 
-// tipos de perfil aceitos pelo sistema
 export type Role = "cliente" | "admin";
 
 export class Auth {
 
-    /**
-     * Valida email + senha e devolve um token JWT
-     */
     static async validacaoUsuario(req: Request, res: Response): Promise<void> {
         const { email, senha } = req.body as { email: string; senha: string };
 
@@ -74,16 +69,11 @@ export class Auth {
         }
     }
 
-    /**
-     * Gera o token JWT com idUsuario e email
-     */
+
     static generateToken(idUsuario: number, email: string, role: string): string {
         return jwt.sign({ idUsuario, email, role }, SECRET, { expiresIn: "8h" });
     }
 
-    /**
-     * Middleware que protege rotas — verifica o token Bearer
-     */
     static verifyToken(req: Request, res: Response, next: NextFunction): void {
         const authHeader = req.headers.authorization;
 
@@ -122,10 +112,6 @@ export class Auth {
         });
     }
 
-    /**
-     * Middleware que só libera o acesso para usuários com role "admin".
-     * Deve ser usado sempre depois de Auth.verifyToken na cadeia de middlewares.
-     */
     static verifyAdmin(req: Request, res: Response, next: NextFunction): void {
         if (!req.usuario || req.usuario.role !== "admin") {
             res.status(403).json({ auth: false, message: "Acesso restrito ao administrador." });
