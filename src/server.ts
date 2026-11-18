@@ -9,12 +9,11 @@ server.use(cors({ origin: true, credentials: true }));
 server.use(express.json());
 server.use(router);
 
-// Middleware 404
 server.use((req: Request, res: Response) => {
     res.status(404).json({ erro: "Rota não encontrada" });
 });
 
-// Middleware de erro global — deve ser o último
+
 server.use(errorMiddleware as any);
 
 export { server };
