@@ -28,10 +28,7 @@ export class DatabaseModel {
         }
     }
 
-    /**
-     * Garante que as colunas usadas pelo código existam (idempotente).
-     * Evita o erro 500 "Erro ao listar usuários" quando o banco é antigo.
-     */
+
     public async migrar(): Promise<void> {
         await this._pool.query(`ALTER TABLE produtos ADD COLUMN IF NOT EXISTS imagem TEXT`);
         await this._pool.query(`ALTER TABLE usuarios ADD COLUMN IF NOT EXISTS telefone VARCHAR(20)`);
@@ -42,6 +39,4 @@ export class DatabaseModel {
         return this._pool;
     }
 }
-
-// Exportação padrão para o app.ts reconhecer
 export default DatabaseModel;
